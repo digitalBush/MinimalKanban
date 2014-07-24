@@ -1,0 +1,31 @@
+﻿<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">New Card</h4>
+        </div>
+        <div class="modal-body">
+            <form role="form">
+                <div class="form-group">
+                    <label for="name">Title</label>
+                    <input id="name" type="text" class="form-control span2" data-bind='value:title' />
+                </div>
+                <div class="form-group">
+                    <label for="name">Description</label>
+                    <textarea rows="5" id="name" type="text" class="form-control span2" data-bind='value:description' />
+                </div>
+                <div class="form-group">
+                    <label for="name">Lane</label>
+                    <select class="form-control" data-bind=" options: lanes,
+                            optionsText: 'name' ,
+                            optionsValue: 'id' ,
+                            value: laneId"></select>
+                        
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-bind='click:close'>Cancel</button>
+            <button type="button" class="btn btn-primary" data-bind='click: save'>Create</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div> <!-- /.modal-dialog -->
