@@ -52,11 +52,21 @@
     right: 10px;
 }
 
-
+.cards {
+    min-height: 200px;
+}
 .card {
     background-color: #fdf6d7;
     padding: 1px 15px 15px;
     margin-bottom: 15px;
     border-radius: 4px;
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.2);
+
+}
+
+.placeholder {
+    border: 2px dotted #ccc;
+    border-radius: 4px;
+    padding: 1px 15px 15px;
+    margin-bottom: 15px;
 }

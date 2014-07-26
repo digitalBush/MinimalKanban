@@ -7,6 +7,7 @@
         this.cards = ko.observableArray();
     };
 
+
     var Board = function () {
         this.lanes = ko.observableArray().extend({ ctor: Lane });
     };
@@ -29,6 +30,10 @@
                 .then(function(result) {
                     console.log(result);
                 });
+        },
+        moveCard: function (item, position, dest) {
+            var self = this;
+            http.put('/api/board/' + self.id + '/lane/' + dest.id + '/' + item.id, position);
         }
     });
 

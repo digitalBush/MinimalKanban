@@ -24,7 +24,9 @@ namespace Infrastructure.Persistence
 
                     return wireup.Build();
                 }).SingleInstance();
+
             builder.RegisterType<InProcessDispatcher>().AsImplementedInterfaces();
+            
             builder.RegisterGeneric(typeof(EventStoreRepository<>))
                 .AsImplementedInterfaces();
         }

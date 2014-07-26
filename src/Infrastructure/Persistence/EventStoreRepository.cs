@@ -18,11 +18,11 @@ namespace Infrastructure.Persistence
         public Task<T> Get(Guid id)
         {
             return Task.Run(() =>{
-                using (var stream = _events.OpenStream(id, 0, Int32.MaxValue))
+                using (var stream = _events.OpenStream(id, 0))
                 {
                     if (stream.CommitSequence == 0)
                         return null;
-                    var aggregate = Activator.CreateInstance(typeof (T), true) as T;
+                    var aggregate = (T)Activator.CreateInstance(typeof (T), true);
                     aggregate.LoadFromHistory(stream.CommittedEvents.Select(x => x.Body).OfType<IEvent>());
                     return aggregate;
                 }

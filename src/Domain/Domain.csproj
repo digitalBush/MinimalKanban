@@ -51,8 +51,10 @@
     <Compile Include="Commands\Board\Commands.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="DomainException.cs" />
+    <Compile Include="EventHandlers\NewCard.cs" />
     <Compile Include="EventRouter.cs" />
     <Compile Include="HandlerNotFoundException.cs" />
+    <Compile Include="ICommandProcessor.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IHandle.cs" />
     <Compile Include="IRepository.cs" />

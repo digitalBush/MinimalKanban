@@ -142,6 +142,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\bindings\sortable.js" />
     <Content Include="App\bindings\href.js" />
     <Content Include="App\main.js" />
     <Content Include="App\services\events.js" />
@@ -204,6 +205,8 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-ui-sortable.js" />
+    <Content Include="Scripts\jquery-ui-sortable.min.js" />
     <Content Include="Scripts\jquery.signalR-2.1.0.js" />
     <Content Include="Scripts\jquery.signalR-2.1.0.min.js" />
     <Content Include="Scripts\knockout-3.1.0.debug.js" />
@@ -231,6 +234,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Command.cs" />
     <Compile Include="Services\SignalREventDispatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

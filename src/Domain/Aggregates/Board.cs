@@ -7,6 +7,7 @@ namespace Domain.Aggregates
     public class Board : AggregateRoot
     {
         List<int> _lanes = new List<int>();
+        Dictionary<Guid,int> _cardMap = new Dictionary<Guid, int>(); 
         
         void Apply(BoardCreated e)
         {
@@ -18,15 +19,36 @@ namespace Domain.Aggregates
         {
         }
 
+
+        void Apply(CardAdded e)
+        {
+            _cardMap[e.CardId] = e.LaneId;
+        }
+
         void Apply(CardMoved e)
         {
+            _cardMap[e.CardId] = e.LaneId;
         }
+
+        private Board(){}
 
         public Board(string name, IList<string> laneNames )
         {   
             RaiseEvent(new BoardCreated() {
                 Name = name,
                 LaneNames = laneNames
+            });
+        }
+
+        public void AddCard(Guid cardId, int laneId)
+        {
+            AssertLane(laneId);
+
+            RaiseEvent(new CardAdded()
+            {
+                CardId = cardId,
+                LaneId = laneId,
+                Position = _cardMap.ToLookup(x=>x.Value)[laneId].Count()
             });
         }
 
@@ -37,6 +59,7 @@ namespace Domain.Aggregates
             RaiseEvent(new CardMoved()
             {
                 CardId = cardId,
+                FromLaneId = _cardMap[cardId],
                 LaneId = laneId,
                 Position = position
             });
@@ -55,6 +78,13 @@ namespace Domain.Aggregates
         public IList<string> LaneNames { get; set; }
     }
 
+    public class CardAdded : Event
+    {
+        public Guid CardId { get; set; }
+        public int LaneId { get; set; }
+        public int Position { get; set; }
+    }
+
     public class BoardArchived : Event
     {
         
@@ -63,6 +93,7 @@ namespace Domain.Aggregates
     public class CardMoved : Event
     {
         public Guid CardId { get; set; }
+        public int FromLaneId { get; set; }
         public int LaneId { get; set; }
         public int Position { get; set; }
     }

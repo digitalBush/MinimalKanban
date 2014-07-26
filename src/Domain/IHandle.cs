@@ -6,7 +6,7 @@ namespace Domain
 
     public interface IHandle<in T> where T:IEvent
     {
-        void Handle(T cmd);
+        void Handle(T e);
     }
 
     public interface IHandleCommand<in TRequest> where TRequest : ICommand

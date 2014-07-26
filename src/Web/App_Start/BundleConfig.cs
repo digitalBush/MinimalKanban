@@ -10,6 +10,7 @@ namespace Kanban {
 	  bundles.Add(
 		new ScriptBundle("~/Scripts/vendor")
 			.Include("~/Scripts/jquery-{version}.js")
+            .Include("~/Scripts/jquery-ui-sortable.js")
             .Include("~/Scripts/jquery.signalR-{version}.js")
 			.Include("~/Scripts/bootstrap.js")
 			.Include("~/Scripts/knockout-{version}.js")

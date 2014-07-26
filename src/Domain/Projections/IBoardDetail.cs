@@ -19,7 +19,7 @@ namespace Domain.Projections
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IList<CardSummary> Cards { get; set; }
+        public List<CardSummary> Cards { get; set; }
     }
 
     public class CardSummary

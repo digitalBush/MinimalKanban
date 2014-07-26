@@ -8,6 +8,7 @@ using Domain;
 using Infrastructure;
 using Infrastructure.Persistence;
 using Kanban.Controllers.api;
+using Kanban.Helpers;
 using Kanban.Services;
 
 namespace Kanban
@@ -35,6 +36,10 @@ namespace Kanban
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
+            builder.RegisterType<InProcessCommandProcessor>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+            
             builder.RegisterSource(new ContravariantRegistrationSource());
             var container = builder.Build();
 

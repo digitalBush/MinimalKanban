@@ -12,15 +12,16 @@ namespace Denormalizers
         Denormalizer<Guid, Board>,
         IHandle<BoardCreated>,
         IHandle<CardCreated>,
+        IHandle<CardMoved>,
         IBoardDetail
     {
-        public void Handle(BoardCreated cmd)
+        public void Handle(BoardCreated e)
         {
-            WithState(cmd.AggregateId, x =>
+            WithState(e.AggregateId, x =>
                 new Board() {
-                    Id = cmd.AggregateId,
-                    Name = cmd.Name,
-                    Lanes = cmd.LaneNames.Select((lane, index) =>
+                    Id = e.AggregateId,
+                    Name = e.Name,
+                    Lanes = e.LaneNames.Select((lane, index) =>
                         new Lane() {
                             Id = index,
                             Name = lane,
@@ -29,14 +30,24 @@ namespace Denormalizers
                 });
         }
 
-        public void Handle(CardCreated cmd)
+        public void Handle(CardCreated e)
         {
-            WithState(cmd.BoardId, board => {
-                board.Lanes[cmd.LaneId].Cards.Add(new CardSummary() {
-                    Id = cmd.AggregateId,
-                    Title = cmd.Title,
-                    Excerpt = ExcerptOf(cmd.Description)
+            WithState(e.BoardId, board => {
+                board.Lanes[e.LaneId].Cards.Add(new CardSummary() {
+                    Id = e.AggregateId,
+                    Title = e.Title,
+                    Excerpt = ExcerptOf(e.Description)
                 });
+                return board;
+            });
+        }
+
+        public void Handle(CardMoved e)
+        {
+            WithState(e.AggregateId, board =>{
+                var summary = board.Lanes[e.FromLaneId].Cards.SingleOrDefault(x => x.Id == e.CardId);
+                board.Lanes[e.FromLaneId].Cards.Remove(summary);
+                board.Lanes[e.LaneId].Cards.Insert(e.Position,summary);
                 return board;
             });
         }
@@ -49,6 +60,9 @@ namespace Denormalizers
 
         string ExcerptOf(string description)
         {
+            if (description == null)
+                return "";
+
             if (description.Length < 140)
                 return description;
 
@@ -62,7 +76,5 @@ namespace Denormalizers
 
             return String.Concat(chars);
         }
-
-        
     }
 }

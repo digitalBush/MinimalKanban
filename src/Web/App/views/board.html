@@ -5,7 +5,10 @@
             <button class="btn btn-xs btn-info add-new" data-bind="click:$parent.addCard.bind($parent,$data.id)">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
-            <div class="cards" data-bind="foreach:cards">
+            <div class="cards" data-bind="
+                foreach:cards,
+                sortable:$parent.moveCard.bind($parent),
+                sortableOptions:{connectWith: '.cards', items: '.card' }">
                 <div class="card">
                     <h3 data-bind="text:title"></h3>
                     <p data-bind="text:excerpt"></p>

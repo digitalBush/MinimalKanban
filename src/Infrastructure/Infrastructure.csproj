@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
+    <Compile Include="InProcessCommandProcessor.cs" />
     <Compile Include="Messaging\InProcessDispatcher.cs" />
     <Compile Include="Persistence\EventStoreModule.cs" />
     <Compile Include="Persistence\EventStoreRepository.cs" />
