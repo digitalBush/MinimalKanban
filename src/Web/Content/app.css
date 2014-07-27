@@ -81,5 +81,5 @@ a.card p {
 }
 
 .description {
-    white-space: pre;
+    white-space: pre-wrap;
 }
