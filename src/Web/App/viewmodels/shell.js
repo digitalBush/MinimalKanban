@@ -7,8 +7,8 @@
         },this,{deferEvaluation:true}),
         activate: function () {
             router.map([
-                { route: '', title: 'Boards', moduleId: 'viewmodels/list'},
-                { route: 'board/:id', moduleId: 'viewmodels/board'}
+                { route: '', title: 'Boards', moduleId: 'viewmodels/list' },
+                { route: 'board/:id(/:cardId)', moduleId: 'viewmodels/board'}
             ]).buildNavigationModel();
             
             return router.activate({ pushState: true});

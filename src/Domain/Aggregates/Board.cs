@@ -6,8 +6,8 @@ namespace Domain.Aggregates
 {
     public class Board : AggregateRoot
     {
-        List<int> _lanes = new List<int>();
-        Dictionary<Guid,int> _cardMap = new Dictionary<Guid, int>(); 
+        readonly List<int> _lanes = new List<int>();
+        readonly Dictionary<Guid,int> _cardMap = new Dictionary<Guid, int>(); 
         
         void Apply(BoardCreated e)
         {

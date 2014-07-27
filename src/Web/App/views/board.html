@@ -9,10 +9,11 @@
                 foreach:cards,
                 sortable:$parent.moveCard.bind($parent),
                 sortableOptions:{connectWith: '.cards', items: '.card' }">
-                <div class="card">
+                
+                <a class="card" data-bind="href:':id/'">
                     <h3 data-bind="text:title"></h3>
                     <p data-bind="text:excerpt"></p>
-                </div>
+                </a>
             </div>
         </div>
     </div>

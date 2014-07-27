@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardDetail.cs" />
     <Compile Include="BoardDetail.cs" />
     <Compile Include="BoardList.cs" />
     <Compile Include="Denormalizer.cs" />

@@ -10,21 +10,23 @@
         this.lanes = lanes;
     };
 
-    NewCard.prototype.close = function () {
-        dialog.close(this);
-    };
-
-    NewCard.prototype.save = function () {
-        var self = this;
-        return http.put("/api/card", {
-            title: self.title(),
-            description: self.description(),
-            boardId: self.boardId,
-            laneId: self.laneId()
-        }).then(function(result) {
-            return dialog.close(self, result);
-        });
-    };
+    $.extend(NewCard.prototype, {
+        close: function () {
+            dialog.close(this);
+        },
+        save: function (card) {
+            var self = this;
+            return http.put("/api/card", {
+                title: self.title(),
+                description: self.description(),
+                boardId: self.boardId,
+                laneId: self.laneId()
+            }).then(function(result) {
+                return dialog.close(self, card);
+            });
+        
+        }
+    });
 
     return NewCard;
 });

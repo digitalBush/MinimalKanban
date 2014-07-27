@@ -1,12 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using Domain.Commands.Board;
 
 namespace Domain.Commands.Card
 {
     public class CardHandlers :
         IHandleCommand<CreateCard,Guid>
-        
     {
         readonly IRepository<Aggregates.Card> _repo;
 

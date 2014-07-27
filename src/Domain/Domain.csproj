@@ -59,6 +59,7 @@
     <Compile Include="IHandle.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUIEventDispatcher.cs" />
+    <Compile Include="Projections\ICardDetail.cs" />
     <Compile Include="Projections\IBoardDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Projections\IBoardList.cs" />

@@ -146,13 +146,14 @@
     <Content Include="App\bindings\href.js" />
     <Content Include="App\main.js" />
     <Content Include="App\services\events.js" />
-    <Content Include="App\viewmodels\board\NewCardDialog.js" />
-    <Content Include="App\viewmodels\list\NewBoardDialog.js" />
     <Content Include="App\viewmodels\board.js" />
+    <Content Include="App\viewmodels\board\NewCardDialog.js" />
+    <Content Include="App\viewmodels\card.js" />
+    <Content Include="App\viewmodels\list\NewBoardDialog.js" />
     <Content Include="App\viewmodels\list.js" />
     <Content Include="App\viewmodels\list\menu.js" />
     <Content Include="App\viewmodels\shell.js" />
-    <Content Include="App\views\board\menu.html" />
+    <Content Include="App\views\card.html" />
     <Content Include="App\views\board\NewCardDialog.html" />
     <Content Include="App\views\list\NewBoardDialog.html" />
     <Content Include="App\views\board.html" />
