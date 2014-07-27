@@ -6,7 +6,8 @@ namespace Domain.Commands.Board
     public class BoardHandlers :
         IHandleCommand<CreateBoard,Guid>,
         IHandleCommand<AddCard>,
-        IHandleCommand<MoveCard>
+        IHandleCommand<MoveCard>,
+        IHandleCommand<ArchiveCard>
     {
         readonly IRepository<Aggregates.Board> _repo;
 
@@ -36,6 +37,12 @@ namespace Domain.Commands.Board
             await _repo.Save(board);
         }
 
-        
+
+        public async Task Handle(ArchiveCard cmd)
+        {
+            var board = await _repo.Get(cmd.BoardId);
+            board.ArchiveCard(cmd.CardId);
+            await _repo.Save(board);
+        }
     }
 }

@@ -30,6 +30,11 @@ namespace Domain.Aggregates
             _cardMap[e.CardId] = e.LaneId;
         }
 
+        void Apply(CardArchived e)
+        {
+            _cardMap.Remove(e.CardId);
+        }
+
         private Board(){}
 
         public Board(string name, IList<string> laneNames )
@@ -65,17 +70,31 @@ namespace Domain.Aggregates
             });
         }
 
+        public void ArchiveCard(Guid cardId)
+        {
+            RaiseEvent(new CardArchived()
+            {
+                CardId = cardId
+            });
+        }
+
         void AssertLane(int laneId)
         {
             if (!_lanes.Contains(laneId))
                 throw new DomainException("Lane {0} is not on this board", laneId);
         }
+
+        
     }
 
     public class BoardCreated : Event
     {
         public string Name { get; set; }
         public IList<string> LaneNames { get; set; }
+    }
+
+    public class BoardArchived : Event
+    {
     }
 
     public class CardAdded : Event
@@ -85,9 +104,9 @@ namespace Domain.Aggregates
         public int Position { get; set; }
     }
 
-    public class BoardArchived : Event
+    public class CardArchived : Event
     {
-        
+        public Guid CardId { get; set; }
     }
 
     public class CardMoved : Event

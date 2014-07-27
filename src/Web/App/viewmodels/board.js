@@ -21,7 +21,7 @@
             if (cardId) {
                 var Dialog = require("viewmodels/card");
                
-                app.showDialog(new Dialog(cardId))
+                app.showDialog(new Dialog(id,cardId))
                     .then(function() {
                         router.navigate('/board/' + id);
                     });

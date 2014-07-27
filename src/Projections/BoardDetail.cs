@@ -13,7 +13,8 @@ namespace Denormalizers
         IHandle<BoardCreated>,
         IHandle<CardCreated>,
         IHandle<CardMoved>,
-        IBoardDetail
+        IHandle<CardArchived>,
+    IBoardDetail
     {
         public void Handle(BoardCreated e)
         {
@@ -52,6 +53,17 @@ namespace Denormalizers
             });
         }
 
+        public void Handle(CardArchived e)
+        {
+            WithState(e.AggregateId, board =>{
+                foreach (var lane in board.Lanes)
+                {
+                    lane.Cards.RemoveAll(x => x.Id == e.CardId);
+                }
+                return board;
+            });
+        }
+
 
         public Board Get(Guid id)
         {
@@ -76,5 +88,7 @@ namespace Denormalizers
 
             return String.Concat(chars);
         }
+
+        
     }
 }

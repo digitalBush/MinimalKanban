@@ -34,6 +34,18 @@ namespace Kanban.Controllers.api
             return _detail.Get(id);
         }
 
+        [HttpDelete, Route("{id:guid}/{cardId:guid}")]
+        public async Task<StatusCodeResult> Archive(Guid id, Guid cardId)
+        {
+            await Command.Process(new ArchiveCard()
+            {
+                BoardId = id,
+                CardId = cardId,
+            });
+
+            return StatusCode(HttpStatusCode.Accepted);
+        }
+
         [HttpPut, Route("{boardId:guid}/lane/{laneId}/{cardId:guid}")]
         public async Task<StatusCodeResult> Get(Guid boardId, int laneId, Guid cardId, [FromBody]int position)
         {

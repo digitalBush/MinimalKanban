@@ -2,7 +2,8 @@
     var dialog = require('plugins/dialog');
     var http = require('plugins/http');
 
-    var CardDetail = function (id) {
+    var CardDetail = function (boardId, id) {
+        this.boardId = boardId;
         this.id = id;
     };
 
@@ -16,6 +17,13 @@
         },
         close:function () {
             dialog.close(this);
+        },
+        archive: function () {
+            var self = this;
+            return http.remove("/api/board/" + self.boardId + '/' + self.id)
+                .then(function (result) {
+                    return dialog.close(self, result);
+                });
         }
     });
         

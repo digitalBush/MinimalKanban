@@ -23,4 +23,10 @@ namespace Domain.Commands.Board
         public int LaneId { get; set; }
         public int Position { get; set; }
     }
+
+    public class ArchiveCard : ICommand
+    {
+        public Guid BoardId { get; set; }
+        public Guid CardId { get; set; }
+    }
 }

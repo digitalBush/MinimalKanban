@@ -29,11 +29,6 @@ namespace Domain.Aggregates
         public int LaneId { get; set; }
     }
 
-    public class CardArchived : Event
-    {
-
-    }
-
     public class UserAssigned : Event
     {
 
