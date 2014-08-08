@@ -38,7 +38,11 @@ namespace Domain.Aggregates
         private Board(){}
 
         public Board(string name, IList<string> laneNames )
-        {   
+        {
+            if (String.IsNullOrWhiteSpace(name)) throw new ArgumentException("Must provide a name for the board","name");
+            if (laneNames == null || !laneNames.Any()) throw new ArgumentException("Must define at least one lane","laneNames");
+
+
             RaiseEvent(new BoardCreated() {
                 Name = name,
                 LaneNames = laneNames

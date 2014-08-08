@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Denormalizers", "src\Projec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Replay", "src\Replay\Replay.csproj", "{EA019925-8EF0-4212-A1B6-39B1625972C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specs", "src\Specs\Specs.csproj", "{F1381D49-0D6E-4BAB-A26E-C3CCD49447A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EA019925-8EF0-4212-A1B6-39B1625972C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA019925-8EF0-4212-A1B6-39B1625972C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA019925-8EF0-4212-A1B6-39B1625972C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1381D49-0D6E-4BAB-A26E-C3CCD49447A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1381D49-0D6E-4BAB-A26E-C3CCD49447A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1381D49-0D6E-4BAB-A26E-C3CCD49447A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1381D49-0D6E-4BAB-A26E-C3CCD49447A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
