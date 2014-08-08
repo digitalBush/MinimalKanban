@@ -83,3 +83,7 @@ a.card p {
 .description {
     white-space: pre-wrap;
 }
+
+.modal-content {
+    min-height: 400px;
+}
