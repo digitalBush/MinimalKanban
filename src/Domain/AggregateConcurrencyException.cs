@@ -5,9 +5,17 @@ namespace Domain
 {
     public class AggregateConcurrencyException : Exception
     {
-        public AggregateConcurrencyException(Type type, Guid id, List<IEvent> uncommitted, List<IEvent> committed)
+        public Type Type { get; private set; }
+        public Guid Id { get; private set; }
+        public List<IEvent> UncommittedEvents { get; private set; }
+        public List<IEvent> CommittedEvents { get; private set; }
+
+        public AggregateConcurrencyException(Type type, Guid id, List<IEvent> uncommittedEvents, List<IEvent> committedEvents)
         {
-            throw new NotImplementedException();
+            Type = type;
+            Id = id;
+            UncommittedEvents = uncommittedEvents;
+            CommittedEvents = committedEvents;
         }
     }
 }

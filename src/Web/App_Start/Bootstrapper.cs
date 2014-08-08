@@ -7,7 +7,6 @@ using Denormalizers;
 using Domain;
 using Infrastructure;
 using Infrastructure.Persistence;
-using Kanban.Controllers.api;
 using Kanban.Helpers;
 using Kanban.Services;
 
@@ -41,7 +40,6 @@ namespace Kanban
                 .SingleInstance();
             
             builder.RegisterSource(new ContravariantRegistrationSource());
-            builder.Register(c => ConflictDetectorFactory.Create()).SingleInstance();
 
             var container = builder.Build();
 
