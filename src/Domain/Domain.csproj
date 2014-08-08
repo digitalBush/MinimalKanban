@@ -50,6 +50,8 @@
     <Compile Include="Commands\Board\BoardHandlers.cs" />
     <Compile Include="Commands\Board\Commands.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="ConflictDetector.cs" />
+    <Compile Include="ConflictDetectorFactory.cs" />
     <Compile Include="DomainException.cs" />
     <Compile Include="EventHandlers\NewCard.cs" />
     <Compile Include="EventRouter.cs" />

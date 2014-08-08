@@ -41,6 +41,8 @@ namespace Kanban
                 .SingleInstance();
             
             builder.RegisterSource(new ContravariantRegistrationSource());
+            builder.Register(c => ConflictDetectorFactory.Create()).SingleInstance();
+
             var container = builder.Build();
 
             Command.UseContainer(container.BeginLifetimeScope());
