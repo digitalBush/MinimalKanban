@@ -22,7 +22,7 @@ namespace Replay
         public IStateRepository Rebuild()
         {
             var eventStore = _container.Resolve<IStoreEvents>();
-            var commits = eventStore.Advanced.GetFrom(null);
+            var commits = eventStore.Advanced.GetFrom();
             foreach (var commit in commits)
             {
                 foreach (var @event in commit.Events)

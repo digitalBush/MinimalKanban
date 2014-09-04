@@ -87,3 +87,7 @@ a.card p {
 .modal-content {
     min-height: 400px;
 }
+
+.modal-new-card .description {
+    height: 300px;
+}

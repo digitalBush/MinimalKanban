@@ -10,16 +10,16 @@ namespace Denormalizers
 {
     public class CardDetail :
         Denormalizer<Guid, Card>,
-        IHandle<CardCreated>,
+        IHandle<CardCreatedv2>,
         ICardDetail
     {   
 
-        public void Handle(CardCreated e)
+        public void Handle(CardCreatedv2 e)
         {
             WithState(e.AggregateId, card => new Card() {
                     Id = e.AggregateId,
                     Title = e.Title,
-                    Description = e.Description
+                    Description = e.HtmlDescription
                 });
         }
 

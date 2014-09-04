@@ -142,6 +142,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\bindings\medium-editor.js" />
     <Content Include="App\bindings\sortable.js" />
     <Content Include="App\bindings\href.js" />
     <Content Include="App\main.js" />
@@ -165,12 +166,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\medium-editor\theme\default.min.css" />
     <Content Include="Content\durandal.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\ios-startup-image-landscape.png" />
     <Content Include="Content\images\ios-startup-image-portrait.png" />
+    <Content Include="Content\medium-editor\medium-editor.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -214,6 +217,7 @@
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
+    <Content Include="Scripts\medium-editor.min.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />

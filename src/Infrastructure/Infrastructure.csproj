@@ -58,6 +58,10 @@
       <Project>{CA6C3ECC-00CB-456E-BA0F-F4EE80508ADF}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EventConverters\EventConverters.csproj">
+      <Project>{66066CA0-82A5-455C-8300-7C3630713D46}</Project>
+      <Name>EventConverters</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

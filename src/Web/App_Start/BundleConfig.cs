@@ -17,6 +17,7 @@ namespace Kanban {
             .Include("~/Scripts/lodash.js")
             .Include("~/App/bindings/*.js")
             .Include("~/App/helpers/ko.object.js")
+            .Include("~/Scripts/medium-editor.min.js")
 		);
 
       bundles.Add(
@@ -24,6 +25,8 @@ namespace Kanban {
           .Include("~/Content/bootstrap.min.css")
 		  .Include("~/Content/durandal.css")
           .Include("~/Content/app.css")
+          .Include("~/Content/medium-editor/medium-editor.min.css")
+          .Include("~/Content/medium-editor/theme/default.min.css")
         );
     }
 

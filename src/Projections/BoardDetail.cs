@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Domain;
 using Domain.Aggregates;
 using Domain.Projections;
@@ -11,7 +12,7 @@ namespace Denormalizers
     public class BoardDetail :
         Denormalizer<Guid, Board>,
         IHandle<BoardCreated>,
-        IHandle<CardCreated>,
+        IHandle<CardCreatedv2>,
         IHandle<CardMoved>,
         IHandle<CardArchived>,
     IBoardDetail
@@ -31,13 +32,13 @@ namespace Denormalizers
                 });
         }
 
-        public void Handle(CardCreated e)
+        public void Handle(CardCreatedv2 e)
         {
             WithState(e.BoardId, board => {
                 board.Lanes[e.LaneId].Cards.Add(new CardSummary() {
                     Id = e.AggregateId,
                     Title = e.Title,
-                    Excerpt = ExcerptOf(e.Description)
+                    Excerpt = ExcerptOf(e.HtmlDescription)
                 });
                 return board;
             });
@@ -74,10 +75,13 @@ namespace Denormalizers
         {
             if (description == null)
                 return "";
+            var parsed = new HtmlAgilityPack.HtmlDocument();
+            parsed.LoadHtml(description);
+            description = parsed.DocumentNode.InnerText;
 
             if (description.Length < 140)
                 return description;
-
+            
             var chars = description
                 .Take(140)
                 .Reverse()

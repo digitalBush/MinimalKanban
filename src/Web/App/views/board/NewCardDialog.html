@@ -1,4 +1,4 @@
-﻿<div class="modal-dialog modal-lg">
+﻿<div class="modal-dialog modal-lg modal-new-card">
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title">New Card</h4>
@@ -6,15 +6,15 @@
         <div class="modal-body">
             <form role="form">
                 <div class="form-group">
-                    <label for="name">Title</label>
-                    <input id="name" type="text" class="form-control span2" data-bind='value:title' />
+                    <label>Title</label>
+                    <input type="text" class="form-control span2" data-bind='value:title' />
                 </div>
                 <div class="form-group">
-                    <label for="name">Description</label>
-                    <textarea rows="5" id="name" type="text" class="form-control span2" data-bind='value:description' />
+                    <label>Description</label>
+                    <div class='form-control description' data-bind="editor:description"></div>
                 </div>
                 <div class="form-group">
-                    <label for="name">Lane</label>
+                    <label>Lane</label>
                     <select class="form-control" data-bind=" options: lanes,
                             optionsText: 'name' ,
                             optionsValue: 'id' ,

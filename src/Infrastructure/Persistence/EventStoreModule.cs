@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using EventConverters;
 using Infrastructure.Messaging;
 using NEventStore;
 using NEventStore.Dispatcher;
@@ -20,7 +21,8 @@ namespace Infrastructure.Persistence
                         .InitializeStorageEngine()
                         .UsingJsonSerialization()
                         .Compress()
-                        .UsingSynchronousDispatchScheduler(container.Resolve<IDispatchCommits>());
+                        .UsingSynchronousDispatchScheduler(container.Resolve<IDispatchCommits>())
+                        .UsingEventUpconversion().WithConvertersFromAssemblyContaining(typeof(CardCreatedUp));
 
                     return wireup.Build();
                 }).SingleInstance();
