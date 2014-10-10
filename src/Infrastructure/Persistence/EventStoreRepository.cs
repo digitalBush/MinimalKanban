@@ -10,44 +10,59 @@ using NEventStore;
 
 namespace Infrastructure.Persistence
 {
-    public class EventStoreRepository<T> : IDisposable,IRepository<T> where T : AggregateRoot
+    public class EventStoreRepository<T> : IDisposable, IRepository<T> where T : AggregateRoot
     {
         private readonly IStoreEvents _events;
-        private readonly IDictionary<Guid,IEventStream> _streams = new ConcurrentDictionary<Guid, IEventStream>(); 
+        private readonly IDictionary<Guid, IEventStream> _streams = new ConcurrentDictionary<Guid, IEventStream>();
 
-        
+
 
         public EventStoreRepository(IStoreEvents events)
         {
             _events = events;
-            
+
         }
 
         public Task<T> Get(Guid id)
         {
-            return Task.Run(() =>{
-                var stream = OpenStream(id);
-                
-                if (stream.CommitSequence == 0)
-                    return null;
+            return Task.Run(() =>
+            {
 
-                var aggregate = (T)Activator.CreateInstance(typeof (T), true);
-                aggregate.LoadFromHistory(stream.CommittedEvents.Select(x => x.Body).OfType<IEvent>());
+                var aggregate = (T)Activator.CreateInstance(typeof(T), true);
+                var stream = _events.OpenStream(aggregate.Id);
+
+                try
+                {
+                    if (stream.CommitSequence == 0)
+                        return null;
+
+                    //no aggregate with this id has committed any events.
+                    if (stream.StreamRevision == 0) return null;
+
+                    aggregate.LoadFromHistory(stream.CommittedEvents.Select(x => x.Body).OfType<IEvent>());
+                    aggregate.Version = stream.StreamRevision;
+                }
+                finally
+                {
+                    stream.Dispose();
+                }
+
                 return aggregate;
-                
+
             });
         }
 
         public Task Save(T aggregate)
         {
-            return Task.Run(() =>{
-                var stream = OpenStream(aggregate.Id);
-                
+            return Task.Run(() =>
+            {
+                var stream = _events.OpenStream(aggregate.Id, aggregate.Version);
+
                 var commitEventCount = stream.CommittedEvents.Count;
 
                 foreach (var @event in aggregate.GetUncommittedEvents())
                 {
-                    stream.Add(new EventMessage {Body = @event});
+                    stream.Add(new EventMessage { Body = @event });
                 }
 
                 try
@@ -62,22 +77,10 @@ namespace Infrastructure.Persistence
                         stream.CommittedEvents.Skip(commitEventCount).Select(x => x.Body as IEvent).ToList();
 
                     stream.ClearChanges();
-                    throw new AggregateConcurrencyException(typeof (T), aggregate.Id, uncommitted, committed);
+                    throw new AggregateConcurrencyException(typeof(T), aggregate.Id, uncommitted, committed);
 
                 }
             });
-        }
-
-        private IEventStream OpenStream(Guid id)
-        {
-            IEventStream stream;
-            if (_streams.TryGetValue(id, out stream))
-                return stream;
-
-
-            stream = _events.OpenStream(id);
-
-            return _streams[id] = stream;
         }
 
         public void Dispose()

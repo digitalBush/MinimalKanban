@@ -8,7 +8,7 @@ namespace Domain
         private readonly ICollection<IEvent> _uncommittedEvents = new List<IEvent>();
 
         public Guid Id { get; protected set; }
-        public int Version { get; internal set; }
+        protected internal int Version { get; set; }
 
         public ICollection<IEvent> GetUncommittedEvents()
         {
